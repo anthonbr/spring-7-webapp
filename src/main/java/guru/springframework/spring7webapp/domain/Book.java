@@ -24,6 +24,8 @@ public class Book
     inverseJoinColumns = @JoinColumn(name = "author_id"))
   private Set<Author> authors = new HashSet<>();
 
+  // Section 6-publisher-relationship.
+  // Note that Book is the owner of this relationship.  
   @ManyToOne
   @JoinColumn(name = "publisher_id")
   private Publisher publisher;

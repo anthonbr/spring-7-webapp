@@ -16,6 +16,8 @@ public class Publisher
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
 
+  // Section 6-publisher-relationship.
+  // Note that publisher is the inverse side of the relation and not the owner.
   @OneToMany(mappedBy = "publisher")
   private Set<Book> books = new HashSet<>();
 
