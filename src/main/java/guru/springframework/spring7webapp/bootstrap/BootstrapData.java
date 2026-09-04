@@ -49,38 +49,33 @@ public class BootstrapData implements CommandLineRunner
     Author eric = new Author();
     eric.setFirstName("Eric");
     eric.setLastName("Evans");
+    Author ericSaved = authorRepository.save(eric); // save the author
 
     // Add first book
     Book ddd = new Book();
     ddd.setTitle("Domain Driven Design");
     ddd.setIsbn("123456");
     ddd.setPublisher(addisonWesleySaved);
+    addisonWesleySaved.getBooks().add(ddd); // update publisher's hashSet of books
+    ddd.getAuthors().add(ericSaved);        // Update the book's hashSet of authors
 
-    Author ericSaved = authorRepository.save(eric);
-    Book dddSaved = bookRepository.save(ddd);
-    addisonWesleySaved.getBooks().add(dddSaved);
+    Book dddSaved = bookRepository.save(ddd);  // save the book, also creates the row in the join table
 
     // Add second author
     Author rod = new Author();
     rod.setFirstName("Rod");
     rod.setLastName("Johnson");
+    Author rodSaved = authorRepository.save(rod); // save the author
 
     // Add second book
     Book noEJB = new Book();
     noEJB.setTitle("J2EE Development without EJB");
     noEJB.setIsbn("54757585");
     noEJB.setPublisher(wroxSaved);
+    wroxSaved.getBooks().add(noEJB);  // update publisher's hashSet of books
+    noEJB.getAuthors().add(rodSaved); // Update the book's hashSet of authors
 
-    Author rodSaved = authorRepository.save(rod);
-    Book noEJBSaved = bookRepository.save(noEJB);
-    wroxSaved.getBooks().add(noEJBSaved);
-
-    ericSaved.getBooks().add(dddSaved);
-    rodSaved.getBooks().add(noEJBSaved);
-
-    authorRepository.save(ericSaved);
-    authorRepository.save(rodSaved);
-
+    Book noEJBSaved = bookRepository.save(noEJB); // save the book, also creates the row in the join table
 
     System.out.println("In Bootstrap");
     System.out.println("Author Count: " + authorRepository.count());
