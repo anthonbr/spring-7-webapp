@@ -25,7 +25,7 @@ public class Book
   private Set<Author> authors = new HashSet<>();
 
   // Section 6-publisher-relationship.
-  // Note that Book is the owner of this relationship.  
+  // Note that Book is the owner of this relationship.
   @ManyToOne
   @JoinColumn(name = "publisher_id")
   private Publisher publisher;
